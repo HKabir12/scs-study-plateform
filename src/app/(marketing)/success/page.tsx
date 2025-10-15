@@ -77,7 +77,20 @@ const SuccessPage = () => {
       src: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=3000&auto=format&fit=crop",
     },
   ];
-  return <AnimatedTestimonials testimonials={testimonials} autoplay={true} />;
+
+  return (
+    <div className="container mx-auto px-6 md:px-12 py-6">
+      <h1 className="text-center justify-center lg:text-5xl md:text-4xl text-3xl font-bold mb-4">
+        সফল শিক্ষার্থীরা
+      </h1>
+      <p className="text-center text-lg">
+        আমাদের সহায়তায় যারা তাদের স্বপ্ন পূরণ করেছে, সেই সফল শিক্ষার্থীদের
+        অভিজ্ঞতা জানুন।
+      </p>
+
+      <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+    </div>
+  );
 };
 
 export default SuccessPage;

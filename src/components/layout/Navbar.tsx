@@ -18,7 +18,7 @@ import Image from "next/image";
 const Navbar = () => {
   const [progress, setProgress] = useState(0);
   const pathname = usePathname();
-
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     setProgress(20);
     setTimeout(() => setProgress(40), 100);
@@ -91,11 +91,11 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center">
           <span className="mx-2">
             <ModeToggle />
           </span>
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger>
               <svg
                 className="w-6 h-6"
@@ -128,22 +128,23 @@ const Navbar = () => {
                             ? "text-primary font-semibold"
                             : "text-foreground hover:text-primary"
                         }`}
+                        onClick={() => setIsOpen(false)}
                       >
                         {link.label}
                       </Link>
                     ))}
-                    <div>
+                    <p>
                       <Button className="mx-1 text-xs" variant="outline">
-                        <Link href="/login">লগইন </Link>
+                        <Link href="/login" onClick={() => setIsOpen(false)}>লগইন </Link>
                       </Button>
                       <Button
                         className="mx-1 text-xs"
                         variant="outline"
                         asChild
                       >
-                        <Link href="/signin">সাইন আপ</Link>
+                        <Link href="/signin" onClick={() => setIsOpen(false)}>সাইন আপ</Link>
                       </Button>
-                    </div>
+                    </p>
                   </div>
                 </SheetDescription>
               </SheetHeader>

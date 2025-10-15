@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen  pt-28 pb-20">
+    <main className="min-h-screen  pt-6 pb-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">

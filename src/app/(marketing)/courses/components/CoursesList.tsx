@@ -1,72 +1,138 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const courses = [
+
+const allCourses = [
+  // 🟢 SSC Courses
   {
     id: 1,
-    title: "এইচএসসি রেগুলার কোর্স (একাদশ-দ্বাদশ)",
-    description:
-      "পুরো এনসিটিবি সিলেবাস কভারসহ সমস্যা সমাধান ও মডেল টেস্টসহ পূর্ণাঙ্গ কেমিস্ট্রি কোর্স।",
-    image: "/hsc.jpg",
+    category: "ssc",
+    title: "এসএসসি কেমিস্ট্রি রেগুলার কোর্স",
+    description: "SSC সিলেবাস সম্পূর্ণ কভার সহ অনুশীলন ক্লাস ও টেস্ট।",
     duration: "১ বছর",
-    fee: "৳ ১২,০০০",
+    fee: "৳ ৮,০০০",
+    image: "/ssc1.jpg",
   },
   {
     id: 2,
-    title: "এইচএসসি ক্র্যাশ কোর্স",
-    description:
-      "অল্প সময়ে পুনরাবৃত্তি ও গুরুত্বপূর্ণ প্রশ্ন অনুশীলনের জন্য বিশেষ কোর্স।",
-    image: "/hsccrash.jpg",
+    category: "ssc",
+    title: "এসএসসি ক্র্যাশ কোর্স",
+    description: "দ্রুত পুনরাবৃত্তি ও গুরুত্বপূর্ণ প্রশ্ন অনুশীলন।",
     duration: "৩ মাস",
-    fee: "৳ ৫,০০০",
+    fee: "৳ ৪,০০০",
+    image: "/ssc2.jpg",
   },
+
+  // 🟣 HSC Courses
   {
     id: 3,
-    title: "অ্যাডমিশন প্রস্তুতি কোর্স",
-    description:
-      "মেডিকেল, ভার্সিটি ও ইঞ্জিনিয়ারিং ভর্তি পরীক্ষার জন্য বিশেষ কোর্স।",
-    image: "/admission.jpeg",
+    category: "hsc-11",
+    title: "একাদশ শ্রেণি রেগুলার কোর্স",
+    description: "এইচএসসি একাদশ শ্রেণির পূর্ণ কেমিস্ট্রি সিলেবাস কভার।",
+    duration: "১ বছর",
+    fee: "৳ ১২,০০০",
+    image: "/hsc11.jpg",
+  },
+  {
+    id: 4,
+    category: "hsc-12",
+    title: "দ্বাদশ শ্রেণি রেগুলার কোর্স",
+    description: "দ্বাদশ শ্রেণির সম্পূর্ণ সিলেবাস ও মডেল টেস্ট।",
+    duration: "১ বছর",
+    fee: "৳ ১২,০০০",
+    image: "/hsc12.jpg",
+  },
+
+  // 🟠 Crash Courses
+  {
+    id: 5,
+    category: "crash",
+    title: "এইচএসসি ক্র্যাশ কোর্স",
+    description: "কম সময়ে গুরুত্বপূর্ণ বিষয়গুলোর পুনরাবৃত্তি।",
+    duration: "৩ মাস",
+    fee: "৳ ৫,০০০",
+    image: "/hsccrash.jpg",
+  },
+  {
+    id: 6,
+    category: "crash",
+    title: "এসএসসি ক্র্যাশ কোর্স",
+    description: "পরীক্ষার আগে দ্রুত প্রস্তুতির জন্য বিশেষ ক্লাস।",
+    duration: "২ মাস",
+    fee: "৳ ৪,০০০",
+    image: "/ssccrash.jpg",
+  },
+
+  // 🔵 Admission Courses
+  {
+    id: 7,
+    category: "medical",
+    title: "মেডিকেল ভর্তি কোর্স",
+    description: "MBBS ভর্তি পরীক্ষার জন্য বিশেষভাবে তৈরি কোর্স।",
     duration: "৪ মাস",
     fee: "৳ ৮,০০০",
+    image: "/medical.jpg",
+  },
+  {
+    id: 8,
+    category: "varsity",
+    title: "ভার্সিটি ভর্তি কোর্স",
+    description:
+      "ঢাবি, রুয়েট, জাহাঙ্গীরনগরসহ বিভিন্ন ভার্সিটি ভর্তি প্রস্তুতি।",
+    duration: "৪ মাস",
+    fee: "৳ ৭,০০০",
+    image: "/varsity.jpg",
+  },
+  {
+    id: 9,
+    category: "engineering",
+    title: "ইঞ্জিনিয়ারিং ভর্তি কোর্স",
+    description: "BUET, RUET, KUET ভর্তি পরীক্ষার জন্য প্রস্তুতি ক্লাস।",
+    duration: "৪ মাস",
+    fee: "৳ ৮,০০০",
+    image: "/engineering.jpg",
   },
 ];
 
-export default function CoursesList() {
+export default function CoursesList({
+  selectedCategory,
+}: {
+  selectedCategory: string;
+}) {
+  const filteredCourses =
+    selectedCategory === "all"
+      ? allCourses
+      : allCourses.filter((c) => c.category === selectedCategory);
+
   return (
-    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      {courses.map((course) => (
-        <div
-          key={course.id}
-          className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100"
-        >
-          <div className="relative h-56 w-full">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {filteredCourses.length > 0 ? (
+        filteredCourses.map((course) => (
+          <div
+            key={course.id}
+            className=" rounded-xl shadow-sm hover:shadow-lg transition p-4"
+          >
             <Image
               src={course.image}
               alt={course.title}
-              fill
-              className="object-cover"
+              width={400}
+              height={250}
+              className="rounded-lg w-full h-48 object-cover"
             />
+            <h3 className="text-lg font-semibold mt-3">{course.title}</h3>
+            <p className="text-sm  mt-1">{course.description}</p>
+            <div className="mt-3 text-sm ">সময়কাল: {course.duration}</div>
+            <div className="font-semibold text-indigo-600">{course.fee}</div>
+            <Button className="w-full mt-3">বিস্তারিত দেখুন</Button>
           </div>
-          <div className="p-6">
-            <h2 className="text-xl font-semibold ">
-              {course.title}
-            </h2>
-            <p className="mt-2  text-sm">{course.description}</p>
-            <div className="mt-4 flex items-center justify-between text-sm ">
-              <span>সময়কাল: {course.duration}</span>
-              <span>ফি: {course.fee}</span>
-            </div>
-            <div className="mt-6">
-              <Link href={`/courses/${course.id}`}>
-                <Button className="w-full">বিস্তারিত দেখুন</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="text-center col-span-full">
+          এই ক্যাটাগরিতে কোন কোর্স পাওয়া যায়নি।
+        </p>
+      )}
     </div>
   );
 }

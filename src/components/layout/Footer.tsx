@@ -1,26 +1,6 @@
 import * as React from "react";
-
-// --- MOCK COMPONENTS & UTILITIES (To make the single file runnable) ---
-// In a real Next.js environment, you would use:
-// import Link from "next/link";
-// import Image from "next/image";
-
-// Mock Link and Image components for this single-file environment
-const Link = ({ href, children, className, ...props }: any) => (
-  <a href={href} className={className} {...props}>
-    {children}
-  </a>
-);
-
-const Image = ({ src, alt, width, height, className }: any) => (
-  <img
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    className={className}
-  />
-);
+import Image from "next/image";
+import Link from "next/link";
 
 // Lucide-style Icons (using the user's provided SVGs and adding new ones)
 
@@ -316,19 +296,19 @@ const Footer: React.FC = () => {
 
         {/* Separator and Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-700/50">
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm ">
             © {new Date().getFullYear()} Safwan’s Chemistry Solution. All Rights
             Reserved.
           </p>
-          <p className="text-center text-xs text-gray-600 mt-1">
-            Developed with{" "}
+          <p className="text-center text-xs  mt-1">
+            Developer{" "}
             <Link
               href="https://tailwindcss.com"
               className="hover:text-emerald-400 transition-colors"
             >
-              Tailwind CSS
+              Humaon Kabir
             </Link>{" "}
-            and Aceternity UI principles.
+            Jahangirnagar University, Institute of Information Technology
           </p>
         </div>
       </div>

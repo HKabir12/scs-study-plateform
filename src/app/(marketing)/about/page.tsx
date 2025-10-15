@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen  ">
       {/* Hero Section */}
-      <section className="relative py-20 ">
+      <section className="relative py-6 ">
         <div className="container mx-auto px-6 md:px-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold ">
             সম্পর্কে{" "}
@@ -31,19 +31,15 @@ export default function AboutPage() {
       <Separator className="my-8" />
 
       {/* Mission & Vision */}
-      <section className="container mx-auto px-6 md:px-12 py-12 grid md:grid-cols-2 gap-10 items-center">
+      <section className="container mx-auto px-6 md:px-12  grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h2 className="text-3xl font-semibold  mb-4">
-            🎯 আমাদের লক্ষ্য
-          </h2>
+          <h2 className="text-3xl font-semibold  mb-4">🎯 আমাদের লক্ষ্য</h2>
           <p className=" leading-relaxed mb-6">
             আধুনিক শিক্ষণপদ্ধতি, বাস্তব উদাহরণ ও গভীর ধারণার মাধ্যমে উচ্চমানের
             কেমিস্ট্রি শিক্ষা প্রদান করা — যেন প্রতিটি শিক্ষার্থী আত্মবিশ্বাসী
             হয় এবং বিজ্ঞানের প্রতি সত্যিকারের আগ্রহ তৈরি হয়।
           </p>
-          <h2 className="text-3xl font-semibold  mb-4">
-            🌟 আমাদের ভিশন
-          </h2>
+          <h2 className="text-3xl font-semibold  mb-4">🌟 আমাদের ভিশন</h2>
           <p className=" leading-relaxed">
             বাংলাদেশের সবচেয়ে বিশ্বস্ত কেমিস্ট্রি শিক্ষাপ্রতিষ্ঠান হিসেবে গড়ে
             ওঠা, যেখানে প্রতি বছর হাজারো শিক্ষার্থী HSC, ভর্তি ও
@@ -63,7 +59,7 @@ export default function AboutPage() {
       <Separator className="my-8" />
 
       {/* Teacher Profile */}
-      <section className="container mx-auto px-6 md:px-12 py-16 text-center">
+      <section className="container mx-auto px-6 md:px-12 py-6 text-center">
         <h2 className="text-4xl font-bold mb-10">আমাদের গাইড ও পরামর্শক</h2>
         <div className="flex flex-col md:flex-row items-center gap-10 justify-center">
           <Image
@@ -96,9 +92,7 @@ export default function AboutPage() {
       {/* Achievements */}
       <section className="">
         <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl font-semibold pb-3">
-            আমাদের সাফল্য এক নজরে
-          </h2>
+          <h2 className="text-3xl font-semibold pb-3">আমাদের সাফল্য এক নজরে</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { label: "সফলতার বছর", value: "১০+" },
