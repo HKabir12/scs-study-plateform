@@ -14,6 +14,8 @@ const allCourses = [
     duration: "১ বছর",
     fee: "৳ ৮,০০০",
     image: "/ssc1.jpg",
+    day: "Saturday & Sunday",
+    time: "4:00 PM - 6:00 PM",
   },
   {
     id: 2,
@@ -23,6 +25,8 @@ const allCourses = [
     duration: "৩ মাস",
     fee: "৳ ৪,০০০",
     image: "/ssc2.jpg",
+    day: "Friday & Saturday",
+    time: "5:00 PM - 7:00 PM",
   },
 
   // 🟣 HSC Courses
@@ -34,6 +38,8 @@ const allCourses = [
     duration: "১ বছর",
     fee: "৳ ১২,০০০",
     image: "/hsc11.jpg",
+    day: "Saturday & Sunday",
+    time: "4:00 PM - 6:00 PM",
   },
   {
     id: 4,
@@ -43,6 +49,8 @@ const allCourses = [
     duration: "১ বছর",
     fee: "৳ ১২,০০০",
     image: "/hsc12.jpg",
+    day: "Saturday & Sunday",
+    time: "6:30 PM - 8:30 PM",
   },
 
   // 🟠 Crash Courses
@@ -54,6 +62,8 @@ const allCourses = [
     duration: "৩ মাস",
     fee: "৳ ৫,০০০",
     image: "/hsccrash.jpg",
+    day: "Friday & Saturday",
+    time: "5:00 PM - 7:00 PM",
   },
   {
     id: 6,
@@ -63,6 +73,8 @@ const allCourses = [
     duration: "২ মাস",
     fee: "৳ ৪,০০০",
     image: "/ssccrash.jpg",
+    day: "Friday & Saturday",
+    time: "4:00 PM - 6:00 PM",
   },
 
   // 🔵 Admission Courses
@@ -74,6 +86,8 @@ const allCourses = [
     duration: "৪ মাস",
     fee: "৳ ৮,০০০",
     image: "/medical.jpg",
+    day: "Friday & Saturday",
+    time: "5:00 PM - 7:00 PM",
   },
   {
     id: 8,
@@ -84,6 +98,8 @@ const allCourses = [
     duration: "৪ মাস",
     fee: "৳ ৭,০০০",
     image: "/varsity.jpg",
+    day: "Friday & Saturday",
+    time: "4:00 PM - 6:00 PM",
   },
   {
     id: 9,
@@ -93,6 +109,8 @@ const allCourses = [
     duration: "৪ মাস",
     fee: "৳ ৮,০০০",
     image: "/engineering.jpg",
+    day: "Friday & Saturday",
+    time: "6:30 PM - 8:30 PM",
   },
 ];
 
@@ -107,12 +125,12 @@ export default function CoursesList({
       : allCourses.filter((c) => c.category === selectedCategory);
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-4">
       {filteredCourses.length > 0 ? (
         filteredCourses.map((course) => (
           <div
             key={course.id}
-            className=" rounded-xl shadow-sm hover:shadow-lg transition p-4"
+            className=" rounded-xl border-3 shadow-sm hover:shadow-lg transition p-4"
           >
             <Image
               src={course.image}
@@ -124,6 +142,8 @@ export default function CoursesList({
             <h3 className="text-lg font-semibold mt-3">{course.title}</h3>
             <p className="text-sm  mt-1">{course.description}</p>
             <div className="mt-3 text-sm ">সময়কাল: {course.duration}</div>
+            <div className="text-sm ">দিন: {course.day}</div>
+            <div className="text-sm ">সময়: {course.time}</div>
             <div className="font-semibold text-indigo-600">{course.fee}</div>
             <Button className="w-full mt-3">বিস্তারিত দেখুন</Button>
           </div>

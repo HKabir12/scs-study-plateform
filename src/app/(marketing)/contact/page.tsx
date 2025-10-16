@@ -1,9 +1,14 @@
-"use client";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+export const metadata = {
+  title: "যোগাযোগ | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
+  description:
+    "পাবনার সবচেয়ে বিশ্বস্ত HSC ও ভর্তি প্রস্তুতির কেমিস্ট্রি ইনস্টিটিউট — সাফওয়ান’স কেমিস্ট্রি সলিউশন এর সাথে যোগাযোগ করুন।",
+};
 
 export default function ContactPage() {
   return (

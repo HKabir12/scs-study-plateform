@@ -8,8 +8,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Safwan Chemistry Solutions",
-  description: "A comprehensive chemistry learning platform.",
+  title: "সাফওয়ান’স কেমিস্ট্রি সলিউশন",
+  description: "একটি ব্যাপক কেমিস্ট্রি শেখার প্ল্যাটফর্ম।",
   icons: {
     icon: "https://i.ibb.co.com/JRCsjDmr/scslogo.jpg",
     shortcut: "https://i.ibb.co.com/JRCsjDmr/scslogo.jpg",

@@ -230,7 +230,7 @@ const itemVariants: Variants = {
 // --- MAIN COMPONENT ---
 const ServicesSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 text-balance font-sans overflow-hidden">
+    <section className="py-6 md:py-24 text-balance font-sans overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ y: -50, opacity: 0 }}

@@ -1,5 +1,11 @@
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { Metadata } from "next";
 import React from "react";
+ export const metadata: Metadata ={
+  title: "সফল শিক্ষার্থীরা | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
+  description:
+    "আমাদের সহায়তায় যারা তাদের স্বপ্ন পূরণ করেছে, সেই সফল শিক্ষার্থীদের অভিজ্ঞতা জানুন।",
+};
 
 const SuccessPage = () => {
   const testimonials = [
