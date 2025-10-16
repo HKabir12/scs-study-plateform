@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+import LocationsSection from "./components/LocationsSection";
 export const metadata = {
   title: "যোগাযোগ | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
   description:
@@ -76,6 +77,7 @@ export default function ContactPage() {
           <p>মোবাইল: +880 1700 000000</p>
         </div>
       </div>
+      <LocationsSection />
     </main>
   );
 }

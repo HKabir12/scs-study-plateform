@@ -68,7 +68,7 @@ export default function HeroSection() {
           {/* Text Content */}
           <div className="mx-auto max-w-lg text-center lg:ml-0 lg:w-1/2 lg:text-left">
             <h1 className="mt-8 max-w-2xl text-xl font-bold leading-tight lg:mt-0 lg:text-5xl">
-              <ColourfulText text="SAFWAN’S CHEMISTRY SOLUTIONS" />
+              <ColourfulText text="SAFWAN’S CHEMISTRY SOLUTION" />
             </h1>
 
             <p className="mt-8 max-w-2xl text-pretty text-lg">
