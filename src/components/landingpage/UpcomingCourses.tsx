@@ -5,8 +5,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  // CarouselNext,
+  // CarouselPrevious,
 } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -32,13 +32,13 @@ const courses = [
     start: "শুরু: জানুয়ারি ১০, ২০২৬",
     duration: "সময়কাল: ৩ মাস",
     desc: "SSC শিক্ষার্থীদের জন্য মূলভিত্তি গঠনের কোর্স।",
-    img: "/course1.jpg",
+    img: "/images/course3.jpg",
   },
 ];
 
 export default function UpcomingCourses() {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 ">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black dark:text-white">
           আসন্ন কোর্সসমূহ
@@ -87,8 +87,8 @@ export default function UpcomingCourses() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          {/* <CarouselPrevious />
+          <CarouselNext /> */}
         </Carousel>
       </div>
     </section>

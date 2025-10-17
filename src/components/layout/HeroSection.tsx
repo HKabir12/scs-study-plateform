@@ -78,8 +78,8 @@ export default function HeroSection() {
 
             <div className="mt-12 flex flex-col items-center justify-center gap-2 sm:flex-row lg:justify-start">
               <Button asChild size="lg" className="px-5 text-base">
-                <Link href="#link">
-                  <span className="text-nowrap">শুরু করুন</span>
+                <Link href="/courses">
+                  <span className="text-nowrap">কোর্সসমূহ</span>
                 </Link>
               </Button>
               <Button
@@ -88,8 +88,8 @@ export default function HeroSection() {
                 variant="ghost"
                 className="px-5 text-base"
               >
-                <Link href="#link">
-                  <span className="text-nowrap">ডেমো অনুরোধ করুন</span>
+                <Link href="/about">
+                  <span className="text-nowrap">আমাদের সম্পর্কে</span>
                 </Link>
               </Button>
             </div>

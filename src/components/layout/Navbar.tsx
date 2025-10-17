@@ -135,14 +135,18 @@ const Navbar = () => {
                     ))}
                     <p>
                       <Button className="mx-1 text-xs" variant="outline">
-                        <Link href="/login" onClick={() => setIsOpen(false)}>লগইন </Link>
+                        <Link href="/login" onClick={() => setIsOpen(false)}>
+                          লগইন{" "}
+                        </Link>
                       </Button>
                       <Button
                         className="mx-1 text-xs"
                         variant="outline"
                         asChild
                       >
-                        <Link href="/signin" onClick={() => setIsOpen(false)}>সাইন আপ</Link>
+                        <Link href="/signin" onClick={() => setIsOpen(false)}>
+                          সাইন আপ
+                        </Link>
                       </Button>
                     </p>
                   </div>
