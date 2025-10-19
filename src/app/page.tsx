@@ -6,8 +6,8 @@ import ServicesSection from "@/components/landingpage/ServicesSection";
 import { SuccessTimeline } from "@/components/landingpage/TimelineDemo";
 import UpcomingCourses from "@/components/landingpage/UpcomingCourses";
 import WhyChooseUs from "@/components/landingpage/WhyChooseUs";
-
 import HeroSection from "@/components/layout/HeroSection";
+
 import MarqueeText from "@/components/utilities/MarqueeText";
 
 export default function Home() {

@@ -1,24 +1,55 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import LoadingBar from "react-top-loading-bar";
+import { useSession, signOut } from "next-auth/react";
+
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/theme/theme-btn";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ModeToggle } from "@/components/theme/theme-btn";
-import LoadingBar from "react-top-loading-bar";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 
-const Navbar = () => {
-  const [progress, setProgress] = useState(0);
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+import { User, Settings, LogOut } from "lucide-react";
+import { IconDashboard } from "@tabler/icons-react";
+
+export default function Navbar() {
+  const { data: session } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
+  const [progress, setProgress] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { href: "/", label: "হোম" },
+    { href: "/courses", label: "কোর্সসমূহ" },
+    { href: "/about", label: "আমাদের সম্পর্কে" },
+    { href: "/contact", label: "যোগাযোগ" },
+    { href: "/success", label: "সাফল্যের গল্প" },
+    { href: "/dashboard", label: "ড্যাশবোর্ড" },
+  ];
+
+  const isActive = (path: string) => pathname === path;
+
+  // Page loading animation
   useEffect(() => {
     setProgress(20);
     setTimeout(() => setProgress(40), 100);
@@ -29,15 +60,37 @@ const Navbar = () => {
     setTimeout(() => setProgress(0), 50);
   }, []);
 
-  const navLinks = [
-    { href: "/", label: "হোম" },
-    { href: "/courses", label: "কোর্সসমূহ" },
-    { href: "/about", label: "আমাদের সম্পর্কে" },
-    { href: "/contact", label: "যোগাযোগ" },
-    { href: "/success", label: "সাফল্যের গল্প" },
-  ];
+  // Logout handler
+  const handleLogout = () => signOut({ callbackUrl: "/" });
 
-  const isActive = (path: string) => pathname === path;
+  // Avatar dropdown menu
+  const UserMenu = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar>
+          <AvatarImage src={session?.user?.image || "/default-avatar.png"} />
+          <AvatarFallback>{session?.user?.name?.[0] || "U"}</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent sideOffset={10}>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => router.push("/profile")}>
+          <User className="h-[1.2rem] w-[1.2rem] mr-2" /> Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+          <IconDashboard className="h-[1.2rem] w-[1.2rem] mr-2" />
+          ড্যাশবোর্ড
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/settings")}>
+          <Settings className="h-[1.2rem] w-[1.2rem] mr-2" /> Settings
+        </DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" onClick={handleLogout}>
+          <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" /> Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 
   return (
     <nav className="bg-background/50 sticky top-0 backdrop-blur border-b z-10 m-2">
@@ -46,6 +99,7 @@ const Navbar = () => {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
+
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
@@ -79,15 +133,22 @@ const Navbar = () => {
             </Link>
           ))}
 
-          <p className="flex items-center">
-            <Button className="mx-1" variant="outline">
-              <Link href="/login">লগইন</Link>
-            </Button>
-            <Button className="mx-1" variant="outline" asChild>
-              <Link href="/signin">সাইন আপ</Link>
-            </Button>
-            <ModeToggle />
-          </p>
+          {session?.user ? (
+            <div className="flex gap-4">
+              <ModeToggle />
+              <UserMenu />
+            </div>
+          ) : (
+            <p className="flex items-center">
+              <Button className="mx-1" variant="outline">
+                <Link href="/login">লগইন</Link>
+              </Button>
+              <Button className="mx-1" variant="outline" asChild>
+                <Link href="/signin">সাইন আপ</Link>
+              </Button>
+              <ModeToggle />
+            </p>
+          )}
         </div>
 
         {/* Mobile Menu */}
@@ -114,7 +175,7 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="right">
               <SheetHeader>
-                <SheetTitle className="font-bold my-4">
+                <SheetTitle className="font-bold my-2">
                   সাফওয়ান’স কেমিস্ট্রি সলিউশন
                 </SheetTitle>
                 <SheetDescription>
@@ -133,22 +194,29 @@ const Navbar = () => {
                         {link.label}
                       </Link>
                     ))}
-                    <p>
-                      <Button className="mx-1 text-xs" variant="outline">
-                        <Link href="/login" onClick={() => setIsOpen(false)}>
-                          লগইন{" "}
-                        </Link>
-                      </Button>
-                      <Button
-                        className="mx-1 text-xs"
-                        variant="outline"
-                        asChild
-                      >
-                        <Link href="/signin" onClick={() => setIsOpen(false)}>
-                          সাইন আপ
-                        </Link>
-                      </Button>
-                    </p>
+
+                    {session?.user ? (
+                      <UserMenu />
+                    ) : (
+                      <p>
+                        <Button
+                          className="mx-1 text-xs"
+                          variant="outline"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <Link href="/login">লগইন</Link>
+                        </Button>
+                        <Button
+                          className="mx-1 text-xs"
+                          variant="outline"
+                          asChild
+                        >
+                          <Link href="/signin" onClick={() => setIsOpen(false)}>
+                            সাইন আপ
+                          </Link>
+                        </Button>
+                      </p>
+                    )}
                   </div>
                 </SheetDescription>
               </SheetHeader>
@@ -158,6 +226,4 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

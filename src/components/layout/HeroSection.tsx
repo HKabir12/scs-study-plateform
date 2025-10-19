@@ -62,7 +62,7 @@ export default function HeroSection() {
     );
   }
   return (
-    <main className="">
+    <main className="dark:mt-4">
       <section className=" ">
         <div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:flex-row lg:items-center">
           {/* Text Content */}

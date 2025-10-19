@@ -1,4 +1,4 @@
-import SignupFormDemo from "@/app/(auth)/signin/signup-form-demo";
+import SignupForm from "@/app/(auth)/signin/signup-form-demo";
 import React from "react";
 import SigninLottieFile from "./components/SigninLottieFile";
 
@@ -9,7 +9,7 @@ export const metadata = {
 const SignUp = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row items-center justify-center py-6 sm:space-y-0 md:space-x-8">
-      <SignupFormDemo />
+      <SignupForm />
       <SigninLottieFile />
     </div>
   );

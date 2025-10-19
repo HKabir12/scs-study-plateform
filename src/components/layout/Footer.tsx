@@ -29,7 +29,7 @@ export default function Footer() {
 
   return (
     <>
-    <footer className="py-12 md:py-16 border-t border-gray-700 bg-gray-900 text-gray-300 font-sans">
+    <footer className="py-6 md:py-10 border-t border-gray-700 bg-gray-900 text-gray-300 font-sans">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* -------- GRID SECTION -------- */}
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-10 md:gap-8 text-center md:text-left">

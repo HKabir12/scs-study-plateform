@@ -38,7 +38,7 @@ const courses = [
 
 export default function UpcomingCourses() {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 ">
+    <section className="py-8 ">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black dark:text-white">
           আসন্ন কোর্সসমূহ
