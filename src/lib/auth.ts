@@ -1,50 +1,38 @@
+// src/lib/auth.ts
 "use server";
 
+import { cookies } from "next/headers";
 import { MongoClient } from "mongodb";
-import bcrypt from "bcryptjs";
 
 const uri = process.env.NEXT_PUBLIC_MONGODB_URI as string;
 const dbName = process.env.DB_NAME as string;
 
-interface RegisterFormData {
-  firstName: string;
-  lastName: string;
+export interface User {
+  _id: string;
+  name: string;
   email: string;
-  password: string;
+  role: "admin" | "moderator" | "student";
 }
 
-interface UserDocument extends RegisterFormData {
-  role: string;
-  createdAt: Date;
-}
+// Example: get currently logged-in user from cookie (mock/session)
+export async function getCurrentUser(): Promise<User | null> {
+  try {
+    const cookieStore =await cookies();
+    const userEmail = cookieStore.get("user_email")?.value;
 
-export async function registerUser(
-  formData: RegisterFormData
-): Promise<UserDocument> {
-  const client = new MongoClient(uri);
-  await client.connect();
-  const db = client.db(dbName);
-  const users = db.collection<UserDocument>("users");
+    if (!userEmail) return null;
 
-  // Check if email already exists
-  const existingUser = await users.findOne({ email: formData.email });
-  if (existingUser) {
+    const client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const users = db.collection<User>("users");
+
+    const user = await users.findOne({ email: userEmail });
     await client.close();
-    throw new Error("এই ইমেইলটি ইতিমধ্যে ব্যবহৃত হচ্ছে!");
+
+    return user || null;
+  } catch (err) {
+    console.error("getCurrentUser error:", err);
+    return null;
   }
-
-  // Hash password
-  const hashedPassword = await bcrypt.hash(formData.password, 10);
-
-  const newUser: UserDocument = {
-    ...formData,
-    password: hashedPassword,
-    role: "student", // default role
-    createdAt: new Date(),
-  };
-
-  await users.insertOne(newUser);
-  await client.close();
-
-  return newUser;
 }

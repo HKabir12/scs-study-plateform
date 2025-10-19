@@ -44,7 +44,6 @@ export default function Navbar() {
     { href: "/about", label: "আমাদের সম্পর্কে" },
     { href: "/contact", label: "যোগাযোগ" },
     { href: "/success", label: "সাফল্যের গল্প" },
-    { href: "/dashboard", label: "ড্যাশবোর্ড" },
   ];
 
   const isActive = (path: string) => pathname === path;
@@ -118,7 +117,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-4 items-center">
+        <div className="hidden md:flex space-x-8 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.href}

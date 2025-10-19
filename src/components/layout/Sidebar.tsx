@@ -1,9 +1,5 @@
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
+"use client";
+
 import React from "react";
 
 import {
@@ -11,7 +7,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
@@ -19,9 +14,6 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarSeparator,
 } from "../ui/sidebar";
 import Link from "next/link";
@@ -32,41 +24,150 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
-import { ChevronDown, ChevronUp, Plus, Projector, User2 } from "lucide-react";
-const links = [
+  BarChart3,
+  BookOpen,
+  ClipboardCheck,
+  CreditCard,
+  FilePlus2,
+  Home,
+  LayoutDashboard,
+  LogOut,
+  Megaphone,
+  MessageCircle,
+  Notebook,
+  Settings,
+  User,
+  Users,
+} from "lucide-react";
+const adminLinks = [
   {
-    label: "ড্যাশবোর্ড",
-    href: "/dashboard",
-    icon: IconBrandTabler,
+    label: "অ্যাডমিন ড্যাশবোর্ড",
+    href: "/dashboard/admin/users",
+    icon: LayoutDashboard,
   },
   {
-    label: "কোর্স",
+    label: "ইউজার ম্যানেজমেন্ট",
+    href: "/dashboard/admin/users",
+    icon: Users,
+  },
+  {
+    label: "কোর্স ম্যানেজমেন্ট",
+    href: "/admin/courses",
+    icon: BookOpen,
+  },
+  {
+    label: "পেমেন্ট হিস্টোরি",
+    href: "/admin/payments",
+    icon: CreditCard,
+  },
+  {
+    label: "রিপোর্ট / অ্যানালিটিকস",
+    href: "/admin/reports",
+    icon: BarChart3,
+  },
+  {
+    label: "সাপোর্ট টিকেট",
+    href: "/admin/support",
+    icon: MessageCircle,
+  },
+  {
+    label: "সেটিংস",
+    href: "/admin/settings",
+    icon: Settings,
+  },
+];
+const moderatorLinks = [
+  {
+    label: "ড্যাশবোর্ড",
+    href: "/moderator/dashboard",
+    icon: Home,
+  },
+  {
+    label: "Marquee Control",
+    href: "/dashboard/moderator/marquee",
+    icon: Megaphone,
+  },
+  {
+    label: "কোর্স ম্যানেজ করুন",
+    href: "/moderator/manage-courses",
+    icon: Notebook,
+  },
+  {
+    label: "শিক্ষার্থী তালিকা",
+    href: "/moderator/students",
+    icon: Users,
+  },
+  {
+    label: "কুইজ / এক্সাম তৈরি",
+    href: "/moderator/create-quiz",
+    icon: FilePlus2,
+  },
+  {
+    label: "ফলাফল দেখুন",
+    href: "/moderator/results",
+    icon: BarChart3,
+  },
+  {
+    label: "প্রোফাইল",
+    href: "/moderator/profile",
+    icon: User,
+  },
+  {
+    label: "সেটিংস",
+    href: "/moderator/settings",
+    icon: Settings,
+  },
+];
+const studentLinks = [
+  {
+    label: "ড্যাশবোর্ড",
+    href: "/student/dashboard",
+    icon: Home,
+  },
+  {
+    label: "আমার কোর্স",
     href: "/student/courses",
-    icon: IconBrandTabler,
+    icon: BookOpen,
+  },
+  {
+    label: "পরীক্ষা / কুইজ",
+    href: "/student/exams",
+    icon: ClipboardCheck,
+  },
+  {
+    label: "রেজাল্ট",
+    href: "/student/results",
+    icon: BarChart3,
   },
   {
     label: "প্রোফাইল",
     href: "/student/profile",
-    icon: IconUserBolt,
+    icon: User,
   },
   {
     label: "সেটিংস",
-    href: "/student/setting",
-    icon: IconSettings,
-  },
-  {
-    label: "লগ আউট",
-    href: "/logout",
-    icon: IconArrowLeft,
+    href: "/student/settings",
+    icon: Settings,
   },
 ];
 
+import { useSession, signOut } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
 const DashboardSidebar = () => {
+  const { data: session } = useSession();
+  const role = session?.user?.role || "student";
+  console.log("object",role)
+
+  const links =
+    role === "admin"
+      ? adminLinks
+      : role === "moderator"
+      ? moderatorLinks
+      : studentLinks;
+  const handleLogout = () => signOut({ callbackUrl: "/" });
   return (
     <div>
       <Sidebar collapsible="icon">
@@ -101,98 +202,16 @@ const DashboardSidebar = () => {
                     )}
                   </SidebarMenuItem>
                 ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-          <SidebarGroup>
-            <SidebarGroupLabel>Projects</SidebarGroupLabel>
-            <SidebarGroupAction>
-              <Plus /> <span className="sr-only">Add Project</span>
-            </SidebarGroupAction>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
+                <SidebarMenuItem
+                  onClick={handleLogout}
+                  className="text-red-600 hover:bg-red-100"
+                >
                   <SidebarMenuButton asChild>
                     <Link href="/#">
-                      <Projector />
-                      See All Projects
+                      <LogOut />
+                      Logout
                     </Link>
                   </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="/#">
-                      <Plus />
-                      Add Project
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-          {/* COLLAPSABLE */}
-          <Collapsible defaultOpen className="group/collapsible">
-            <SidebarGroup>
-              <SidebarGroupLabel asChild>
-                <CollapsibleTrigger>
-                  Collapsable Group
-                  <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                </CollapsibleTrigger>
-              </SidebarGroupLabel>
-              <CollapsibleContent>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link href="/#">
-                          <Projector />
-                          See All Projects
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link href="/#">
-                          <Plus />
-                          Add Project
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </CollapsibleContent>
-            </SidebarGroup>
-          </Collapsible>
-          {/* NESTED */}
-          <SidebarGroup>
-            <SidebarGroupLabel>Nested Items</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="/#">
-                      <Projector />
-                      See All Projects
-                    </Link>
-                  </SidebarMenuButton>
-                  <SidebarMenuSub>
-                    <SidebarMenuSubItem>
-                      <SidebarMenuSubButton asChild>
-                        <Link href="/#">
-                          <Plus />
-                          Add Project
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                    <SidebarMenuSubItem>
-                      <SidebarMenuSubButton asChild>
-                        <Link href="/#">
-                          <Plus />
-                          Add Category
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  </SidebarMenuSub>
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
@@ -204,7 +223,14 @@ const DashboardSidebar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> Kabir <ChevronUp className="ml-auto" />
+                    <Avatar>
+                      <AvatarImage
+                        src={session?.user?.image || "/default-avatar.png"}
+                      />
+                      <AvatarFallback>
+                        {session?.user?.name?.[0] || "U"}
+                      </AvatarFallback>
+                    </Avatar>
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">

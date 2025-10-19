@@ -4,6 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import LocationsSection from "./components/LocationsSection";
 import ContactLottieFile from "./components/ContactLottieFile";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 export const metadata = {
   title: "যোগাযোগ | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
   description:
@@ -12,6 +14,8 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
+    <>
+    <Navbar></Navbar>
     <main className="min-h-screen  pt-6 pb-20">
       <div className="flex  lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-10  sm:px-6  flex-col-reverse ">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -83,5 +87,7 @@ export default function ContactPage() {
       </div>
       <LocationsSection />
     </main>
+    <Footer></Footer>
+    </>
   );
 }

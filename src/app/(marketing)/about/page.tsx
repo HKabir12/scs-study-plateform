@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata = {
   title: "আমাদের সম্পর্কে | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
@@ -11,6 +13,8 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
+    <>
+    <Navbar></Navbar>
     <main className="min-h-screen  ">
       {/* Hero Section */}
       <section className="relative py-6 ">
@@ -134,5 +138,7 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
+    <Footer></Footer>
+    </>
   );
 }

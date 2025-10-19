@@ -2,6 +2,7 @@ import { ThemeProvider } from "next-themes";
 import { cookies } from "next/headers";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import DashboardSidebar from "@/components/layout/Sidebar";
+import SidebarIcon from "@/components/utilities/SidebarIcon";
 
 export const metadata = {
   title: "Dashboard | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
@@ -25,10 +26,12 @@ export default async function DashboardLayout({
         disableTransitionOnChange
       >
         <SidebarProvider defaultOpen={defaultOpen}>
-          <div className="flex min-h-screen">
-            <DashboardSidebar />
-            <main className="flex-1 p-4">{children}</main>
-          </div>
+          <DashboardSidebar></DashboardSidebar>
+
+          <main className="w-full">
+            <SidebarIcon></SidebarIcon>
+            <div className="px-4">{children}</div>
+          </main>
         </SidebarProvider>
       </ThemeProvider>
     </div>

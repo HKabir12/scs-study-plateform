@@ -1,3 +1,5 @@
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Metadata } from "next";
 import React from "react";
@@ -85,6 +87,8 @@ const SuccessPage = () => {
   ];
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="container mx-auto px-6 md:px-12 py-6">
       <h1 className="text-center justify-center lg:text-5xl md:text-4xl text-3xl font-bold mb-4">
         সফল শিক্ষার্থীরা
@@ -96,6 +100,8 @@ const SuccessPage = () => {
 
       <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
     </div>
+    <Footer></Footer>
+    </>
   );
 };
 

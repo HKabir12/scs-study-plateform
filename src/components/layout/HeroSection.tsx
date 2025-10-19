@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
+
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 export default function HeroSection() {

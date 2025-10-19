@@ -1,6 +1,8 @@
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import CoursesPage from "./components/CoursesPage";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "কোর্সসমূহ | সাফওয়ান’স কেমিস্ট্রি সলিউশন",
@@ -10,6 +12,8 @@ export const metadata: Metadata = {
 
 export default function AllCoursesPage() {
   return (
+    <>
+    <Navbar></Navbar>
     <main className="min-h-screen pt-6">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -23,5 +27,7 @@ export default function AllCoursesPage() {
         <CoursesPage></CoursesPage>
       </div>
     </main>
+    <Footer></Footer>
+     </>
   );
 }
