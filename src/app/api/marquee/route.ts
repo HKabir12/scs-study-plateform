@@ -1,7 +1,5 @@
-
-
 import { NextResponse } from "next/server";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId, UpdateFilter, Document } from "mongodb";
 
 const uri = process.env.NEXT_PUBLIC_MONGODB_URI!;
 const dbName = process.env.DB_NAME!;
@@ -21,7 +19,11 @@ export async function GET(req: Request) {
   if (active === "true") {
     data = await db.collection("announcements").findOne({ isActive: true });
   } else {
-    data = await db.collection("announcements").find({}).sort({ updatedAt: -1 }).toArray();
+    data = await db
+      .collection("announcements")
+      .find({})
+      .sort({ updatedAt: -1 })
+      .toArray();
   }
 
   await client.close();
@@ -35,7 +37,10 @@ export async function POST(req: Request) {
   const { text, isActive = false } = await req.json();
 
   if (!text || typeof text !== "string") {
-    return NextResponse.json({ error: "Invalid marquee text" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid marquee text" },
+      { status: 400 }
+    );
   }
 
   const client = new MongoClient(uri);
@@ -66,22 +71,27 @@ export async function PATCH(req: Request) {
 
   // যদি active marquee করতে চাও, আগে অন্যগুলো inactive করে দেবে
   if (isActive === true) {
-    await db.collection("announcements").updateMany({}, { $set: { isActive: false } });
+    await db
+      .collection("announcements")
+      .updateMany({}, { $set: { isActive: false } });
   }
 
   const filter = id ? { _id: new ObjectId(id) } : { isActive: true };
-  const updateDoc: any = {
-    $set: { updatedAt: new Date() },
+
+  // $set explicitly define করে টাইপ safe করা
+  const updateDoc: UpdateFilter<Document> = {
+    $set: {
+      updatedAt: new Date(),
+      ...(text && { text }),
+      ...(typeof isActive === "boolean" && { isActive }),
+    },
   };
-  if (text) updateDoc.$set.text = text;
-  if (typeof isActive === "boolean") updateDoc.$set.isActive = isActive;
 
   await db.collection("announcements").updateOne(filter, updateDoc);
 
   await client.close();
   return NextResponse.json({ success: true });
 }
-
 /**
  * 🔴 DELETE → marquee ডিলিট করা
  * body: { id }

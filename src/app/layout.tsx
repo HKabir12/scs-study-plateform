@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import Footer from "@/components/layout/Footer";
 import ClientProviders from "@/Providers/authProvider/ClientProviders";
 
 export const metadata: Metadata = {

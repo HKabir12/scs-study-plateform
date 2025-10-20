@@ -3,12 +3,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { FaGraduationCap, FaUniversity, FaMedal, FaBook } from "react-icons/fa";
 
 export function SuccessTimeline() {
   const [counts, setCounts] = useState<Record<string, number>>({});
-  const controls = useAnimation();
+ 
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 

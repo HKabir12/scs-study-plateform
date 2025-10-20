@@ -1,4 +1,10 @@
 "use client";
+import { useSession } from "next-auth/react";
+import type {Session } from "next-auth"
+
+type AppSession = Session & {
+  user: Session["user"] & { role?: string };
+};
 
 import React from "react";
 
@@ -153,12 +159,12 @@ const studentLinks = [
   },
 ];
 
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const DashboardSidebar = () => {
   const { data: session } = useSession();
-  const role = session?.user?.role || "student";
+  const role = (session?.user as AppSession["user"])?.role || "student";
   console.log("object",role)
 
   const links =
